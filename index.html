@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORTIS HUB - E-commerce</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 2px;
+        }
+        header p {
+            margin-top: 8px;
+            font-size: 13px;
+            font-style: italic;
+            color: #b0b0b0;
+            letter-spacing: 1px;
+        }
+        .container {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .product-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 240px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .product-card h3 {
+            margin: 15px 0 8px;
+            color: #333;
+            font-size: 17px;
+        }
+        .product-card p {
+            color: #e65100;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #e64a19;
+        }
+
+        /* Amazon Style Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+        .lightbox-header {
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .lightbox-close {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .lightbox-main-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-height: 60vh;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .lightbox-arrow {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .lightbox-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .prev-arrow { left: -50px; }
+        .next-arrow { right: -50px; }
+
+        .lightbox-thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+            max-width: 90%;
+            padding: 5px;
+        }
+        .thumb-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.6;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .thumb-img.active {
+            opacity: 1;
+            border-color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FORTIS HUB</h1>
+        <p>Quality Product At Affordable Prices</p>
+    </header>
+
+    <div class="container">
+        <!-- ആദ്യത്തെ പ്രൊഡക്റ്റ് കാർഡ് -->
+        <div class="product-card">
+            <img src="WALL MOUNT.jpg" alt="Wall Mount Baby Craft" onclick="openLightbox('product1')">
+            <h3>WALL MOUNT BABY CRAFT</h3>
+            <p>₹399</p>
+            <a href="product1.html">
+                <button class="btn">BUY</button>
+            </a>
+        </div>
+
+        <!-- രണ്ടാമത്തെ പ്രൊഡക്റ്റ് കാർഡ് -->
+        <div class="product-card">
+            <img src="cloth1.jpg" alt="Floding Cloth Drying Rack 2" onclick="openLightbox('cloth')">
+            <h3>FLODING CLOTH DRYING RACK 2</h3>
+            <p>₹1300</p>
+            <a href="cloth.html">
+                <button class="btn">BUY</button>
+            </a>
+        </div>
+
+        <!-- മൂന്നാമത്തെ പ്രൊഡക്റ്റ് കാർഡ് (ഉദാഹരണത്തിന്) -->
+        <div class="product-card">
+            <img src="window1.jpg" alt="Product 3" onclick="openLightbox('product3')">
+            <h3>WINDOW CRADLE</h3>
+            <p>₹500</p>
+            <a href="window.html"
+                <button class="btn">BUY</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Amazon Style Lightbox HTML Modal -->
+    <div id="amazonLightbox" class="lightbox-modal">
+        <div class="lightbox-header">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        </div>
+        
+        <div class="lightbox-main-container">
+            <button class="lightbox-arrow prev-arrow" onclick="changeSlide(-1)">&#10094;</button>
+            <img id="lightboxImage" class="lightbox-img" src="" alt="Zoomed Product">
+            <button class="lightbox-arrow next-arrow" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+
+        <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+    </div>
+
+    <script>
+        const productData = {
+            'product1': ["WALL MOUNT.jpg", "wall mount 2.jpg", "wall mount 3.jpg"],
+            'cloth': ["cloth1.jpg", "cloth2.jpg", "cloth3.jpg", "cloth4.jpg"],
+            'product3': ["window1.jpg", "window2.jpg", "window1.jpg"]
+        };
+
+        let currentImages = [];
+        let currentSlide = 0;
+
+        function openLightbox(productId) {
+            currentImages = productData[productId];
+            currentSlide = 0;
+            document.getElementById("amazonLightbox").style.display = "flex";
+            renderLightbox();
+        }
+
+        function closeLightbox() {
+            document.getElementById("amazonLightbox").style.display = "none";
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= currentImages.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = currentImages.length - 1;
+            }
+            renderLightbox();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            renderLightbox();
+        }
+
+        function renderLightbox() {
+            document.getElementById("lightboxImage").src = currentImages[currentSlide];
+
+            const thumbsContainer = document.getElementById("lightboxThumbs");
+            thumbsContainer.innerHTML = "";
+            
+            currentImages.forEach((imgSrc, index) => {
+                const thumb = document.createElement("img");
+                thumb.src = imgSrc;
+                thumb.className = "thumb-img " + (index === currentSlide ? "active" : "");
+                thumb.onclick = () => goToSlide(index);
+                thumbsContainer.appendChild(thumb);
+            });
+        }
+    </script>
+</body>
+</html>
