@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Mount Baby Craft - FORTIS HUB</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 10px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+        .details-container {
+            max-width: 450px;
+            margin: 15px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        /* ഫോട്ടോകൾ കാണുന്ന ഗാലറി സെക്ഷൻ (സ്ക്രോൾ ചെയ്യാവുന്ന രീതിയിൽ) */
+        .image-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 5px;
+            border-radius: 6px;
+        }
+        .image-gallery img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            font-size: 16px;
+            margin: 10px 0 4px;
+        }
+        .price {
+            color: #e65100;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 4px 0;
+        }
+        .description {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 8px 25px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #e64a19;
+        }
+        .back-link {
+            display: block;
+            margin-top: 8px;
+            color: #333;
+            font-size: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FORTIS HUB</h1>
+    </header>
+
+    <div class="details-container">
+        <!-- മൂന്ന് ഫോട്ടോകളും വലിയ സൈസിൽ ഒന്നിന് താഴെ ഒന്നായി കാണുന്ന ഗാലറി -->
+        <div class="image-gallery">
+            <img src="WALL MOUNT.jpg" alt="Wall Mount Baby Craft 1">
+            <img src="wall mount 2.jpg" alt="Wall Mount Baby Craft 2">
+            <img src="wall mount 3.jpg" alt="Wall Mount Baby Craft 3">
+        </div>
+
+        <h2>WALL MOUNT BABY CRAFT</h2>
+        <div class="price">₹399</div>
+        <p class="description">Heavy Duty Metal Baby Cradle Wall Mount Hook / Strong Steel Hanging Stand Bracket for Baby Jhula & Swing (Black).</p>
+        
+        <button class="btn" onclick="alert('Order Successful!')">BUY NOW</button>
+        
+        <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+
+</body>
+</html>

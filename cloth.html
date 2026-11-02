@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Fortis Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .main-image-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .main-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .price {
+            color: #e65100;
+            font-weight: bold;
+            font-size: 22px;
+            margin: 15px 0;
+        }
+        .buy-btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .buy-btn:hover {
+            background-color: #e64a19;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Amazon Style Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+        .lightbox-header {
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .lightbox-close {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .lightbox-main-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-height: 60vh;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .lightbox-arrow {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .lightbox-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .prev-arrow { left: -50px; }
+        .next-arrow { right: -50px; }
+
+        .lightbox-thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+            max-width: 90%;
+            padding: 5px;
+        }
+        .thumb-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.6;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .thumb-img.active {
+            opacity: 1;
+            border-color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-container">
+        <h1>FLODING CLOTH DRYING RACK 2</h1>
+        
+        <!-- പ്രധാന ഫോട്ടോയിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ ലൈറ്റ്‌ബോക്സ് ഗാലറി തുറക്കും -->
+        <div class="main-image-container">
+            <img src="cloth1.jpg" alt="Cloth Drying Rack" class="main-img" onclick="openLightbox()">
+        </div>
+
+        <p class="price">₹1300</p>
+        <p class="description">wall mounted floding cloth drying rack with ropes,heavy duty metal balcony cloth dryer stand / .</p>
+        <a href="checkout.html" class="buy-btn">BUY NOW</a>
+        
+        <!-- ഹോം പേജിലേക്ക് തിരിച്ചുപോകാനുള്ള ലിങ്ക് -->
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+    </div>
+
+    <!-- Amazon Style Lightbox HTML Modal -->
+    <div id="amazonLightbox" class="lightbox-modal">
+        <div class="lightbox-header">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        </div>
+        
+        <div class="lightbox-main-container">
+            <button class="lightbox-arrow prev-arrow" onclick="changeSlide(-1)">&#10094;</button>
+            <img id="lightboxImage" class="lightbox-img" src="" alt="Zoomed Product">
+            <button class="lightbox-arrow next-arrow" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+
+        <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+    </div>
+
+    <script>
+        // ഫോൾഡറിലെ ഫോട്ടോകളുടെ പേരുകൾ
+        const productImages = ["cloth1.jpg", "cloth2.jpg", "cloth3.jpg", "cloth4.jpg"];
+        let currentSlide = 0;
+
+        function openLightbox() {
+            document.getElementById("amazonLightbox").style.display = "flex";
+            currentSlide = 0;
+            renderLightbox();
+        }
+
+        function closeLightbox() {
+            document.getElementById("amazonLightbox").style.display = "none";
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= productImages.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = productImages.length - 1;
+            }
+            renderLightbox();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            renderLightbox();
+        }
+
+        function renderLightbox() {
+            document.getElementById("lightboxImage").src = productImages[currentSlide];
+
+            const thumbsContainer = document.getElementById("lightboxThumbs");
+            thumbsContainer.innerHTML = "";
+            
+            productImages.forEach((imgSrc, index) => {
+                const thumb = document.createElement("img");
+                thumb.src = imgSrc;
+                thumb.className = "thumb-img " + (index === currentSlide ? "active" : "");
+                thumb.onclick = () => goToSlide(index);
+                thumbsContainer.appendChild(thumb);
+            });
+        }
+    </script>
+</body>
+</html>
